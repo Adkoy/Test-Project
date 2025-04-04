@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->char('user_uuid', 36)->primary();
-            $table->string('email')->unique();
-            $table->string('password');
+        Schema::create('bank_cards', function (Blueprint $table) {
+            $table->id();
+            $table->char('user_uuid', 36)->nullable();
+            $table->string('card_number', 20);
+
+            $table->foreign('user_uuid')->references('user_uuid')->on('users')->nullOnDelete();
+
         });
-
-
     }
 
     /**
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bank_cards');
     }
 };
