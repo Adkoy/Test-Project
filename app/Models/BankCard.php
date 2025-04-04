@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BankCard extends Model
 {
-    protected $fillable = ['user_uuid', 'card_number'];
+    use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'user_uuid',
+        'card_number'
+    ];
 
     public function user()
     {
