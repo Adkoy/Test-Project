@@ -13,7 +13,13 @@ class UserRequest extends BaseRequest
     public function rules()
     {
         return [
-            'mobile' => 'required|numeric|exists:users,mobile',
+            'user_uuid' => ['nullable', 'uuid', 'sometimes', 'exists:users'],
+            'email' => ['nullable', 'email', 'exists:users'],
+            'card_number' => ['nullable', 'digits:15', 'exists:bank_cards'],
+            'level' => ['nullable', 'integer', 'between:1,4'],
+            'card_number_count' => ['nullable', 'integer', 'min:0'],
         ];
+
+
     }
 }

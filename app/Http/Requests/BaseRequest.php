@@ -11,18 +11,18 @@ class BaseRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response([
-            'errors' => $validator->errors(),
-            'success' => false,
+            'message' => $validator->errors(),
+            'status' => false,
         ], 400));
     }
 
     protected function failedAuthorization()
     {
         throw new HttpResponseException(response([
-            'errors' => [
+            'message' => [
                 'You are not allowed to do this action.',
             ],
-            'success' => false,
+            'status' => false,
         ], 403));
     }
 }

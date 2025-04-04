@@ -15,6 +15,10 @@ class User extends Authenticatable
     public $timestamps = false;
     protected $keyType = 'string';
 
+    protected $hidden = [
+        'password'
+    ];
+
 
     public function bank_cards()
     {
