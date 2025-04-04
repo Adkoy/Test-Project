@@ -10,6 +10,75 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * @OA\Info(
+     *     title="Test Project",
+     *     version="1.0.0",
+     *     description="This is the API documentation for HomayTech test project."
+     * )
+     * @OA\Get(
+     *     path="/api/users",
+     *     summary="Get all users",
+     *     operationId="getUsers",
+     *     tags={"Users"},
+     *     @OA\Parameter(
+     *         name="user_uuid",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by user UUID",
+     *         @OA\Schema(type="string", format="uuid")
+     *     ),
+     *        @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by user email",
+     *         @OA\Schema(type="string", format="email")
+     *     ),
+     *     @OA\Parameter(
+     *         name="card_number",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by card number",
+     *         @OA\Schema(type="string", maxLength=15)
+     *     ),
+     *     @OA\Parameter(
+     *         name="level",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by user level",
+     *         @OA\Schema(type="integer", enum={1,2,3,4})
+     *     ),
+     *     @OA\Parameter(
+     *         name="card_number_count",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by number of bank cards",
+     *         @OA\Schema(type="integer", minimum=0)
+     *     ),  @OA\Response(
+     *         response=200,
+     *         description="A list of users",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                 @OA\Property(property="user_uuid", type="string", format="uuid"),
+     *                 @OA\Property(property="email", type="string", format="email"),
+     *                 @OA\Property(property="bank_cards", type="array", items=@OA\Items(type="string")),
+     *                 @OA\Property(property="level", type="integer")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid parameters"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found"
+     *     )
+     * )
+     */
+
     public function index(UserRequest $request)
     {
         $request->validated();
